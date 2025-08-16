@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Janmashtami Wishes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Hind:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* आपकी CSS स्टाइलिंग वैसी ही रहेगी */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #00001a;
+            background-image: radial-gradient(circle at top right, #4a0d66, #00001a 50%);
+            font-family: 'Hind', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 223, 0, 0.5);
+            max-width: 90%;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        #krishna-gif {
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+            margin-bottom: 20px;
+        }
+        #greeting {
+            font-family: 'Lobster', cursive;
+            font-size: 3rem;
+            color: #ffd700;
+            text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00, 0 0 20px #ff8c00;
+            margin: 0;
+            line-height: 1.2;
+            animation: glow 2s infinite alternate;
+        }
+        #greeting .from-name {
+            display: block;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-top: 10px;
+            animation: slideIn 1s forwards;
+            opacity: 0;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00; }
+            to { text-shadow: 0 0 15px #ffd700, 0 0 25px #ff8c00, 0 0 35px #ff8c00; }
+        }
+        .wishes-form {
+            margin-top: 30px;
+        }
+        #nameInput {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 2px solid #ffd700;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+        }
+        #nameInput::placeholder {
+            color: #ccc;
+        }
+        #nameInput:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px #ffd700;
+        }
+        #generateBtn {
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: none;
+            background: #25D366; /* WhatsApp Green */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        #generateBtn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+        .firework, .particle { /* आतिशबाजी का इफ़ेक्ट CSS */
+            /* ... यह CSS कोड वैसा ही रहेगा ... */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="fireworks-container"></div>
+
+    <div class="container">
+        <img id="krishna-gif" src="krishna.gif" alt="Lord Krishna Animation">
+        <h1 id="greeting">Happy Janmashtami</h1>
+        <div class="wishes-form">
+            <input type="text" id="nameInput" placeholder="यहाँ अपना नाम लिखें...">
+            <button id="generateBtn">व्हाट्सएप पर शेयर करें</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const greetingElement = document.getElementById('greeting');
+            const nameInputElement = document.getElementById('nameInput');
+            const generateBtnElement = document.getElementById('generateBtn');
+
+            // 1. URL से भेजने वाले का नाम चेक करें
+            const urlParams = new URLSearchParams(window.location.search);
+            const senderName = urlParams.get('from');
+
+            if (senderName) {
+                const decodedName = decodeURIComponent(senderName);
+                greetingElement.innerHTML = `Happy Janmashtami <span class="from-name">from ${decodedName}</span>`;
+            }
+
+            // 2. शेयर बटन का लॉजिक
+            generateBtnElement.addEventListener('click', function() {
+                const name = nameInputElement.value.trim();
+                if (name === "") {
+                    alert("कृपया अपना नाम लिखें!");
+                    return;
+                }
+
+                // URL तैयार करें
+                const baseUrl = window.location.href.split('?')[0];
+                const encodedName = encodeURIComponent(name);
+                const newLink = `${baseUrl}?from=${encodedName}`;
+
+                // व्हाट्सएप के लिए संदेश तैयार करें
+                const message = `*${name}* की तरफ से आपको जन्माष्टमी की हार्दिक शुभकामनाएं! 🦚✨\n\nमेरी शुभकामनाएं देखने के लिए नीचे दिए गए लिंक पर क्लिक करें 👇\n\n${newLink}`;
+                
+                // व्हाट्सएप URL बनाएं
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+                
+                // व्हाट्सएप को नए टैब में खोलें
+                window.open(whatsappUrl, '_blank');
+            });
+
+            // 3. आतिशबाजी का इफ़ेक्ट (यह कोड वैसा ही रहेगा)
+            const fireworksContainer = document.querySelector('body');
+            function createParticle(x, y) { /* ... */ }
+            function createFirework() { /* ... */ }
+            // setInterval(createFirework, 100); // आप इसे चालू या बंद रख सकते हैं
+        });
+    </script>
+</body>
+</html>
